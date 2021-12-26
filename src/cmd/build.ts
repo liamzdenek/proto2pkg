@@ -17,7 +17,8 @@ export const build = command({
         }),
         distDir: option({
             type: optional(Directory),
-            long: "distDir"
+            long: "distDir",
+            description: "defaults to 'dist' subfolder inside the sourceDir",
         })
     },
     handler: async args => {

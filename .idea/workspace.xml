@@ -1,35 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8e6456d-96a9-4d5d-96d6-682e8a9dba67" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assumptions.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/proto2pkg.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/src/main.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/builders/Builder.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/builders/impl/grpcWebProxy.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/builders/impl/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/builders/impl/node.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/builders/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cmd/build.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/checkBinExists.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/execShellCommand.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/generateReadme.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/string-case-normalization.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/bix.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/react/Bixfile.yaml" beforeDir="false" />
+    <list default="true" id="a8e6456d-96a9-4d5d-96d6-682e8a9dba67" name="Default Changelist" comment="Initial commit; functioning generators for node server/client, browser client, and grpc proxy">
+      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service-client-impl/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service-client-impl/src/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service-server-impl/src/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service/proto2pkg.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service/src/main.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/builders/impl/node/readmeGenerators.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmd/register.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmd/registry.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/json-schema.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/svc/Bixfile.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/svc/Registries.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/validateSchema.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/builders/impl/node.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/impl/node/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cmd/build.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmd/build.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/checkBinExists.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/checkBinExists.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/generateReadme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/generateReadme.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,22 +35,28 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../bix-cli" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/example/lerna/packages/bank-service-client-impl" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/example/lerna/packages/bank-service-client-impl" />
+      <recent name="$PROJECT_DIR$/example/lerna/packages" />
       <recent name="$PROJECT_DIR$/example/bank-service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/builders/impl/node" />
       <recent name="$PROJECT_DIR$/src/builders/impl" />
       <recent name="$PROJECT_DIR$/example/bank-service/src" />
       <recent name="$PROJECT_DIR$/src/cmd/old" />
     </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="$PROJECT_DIR$/src/builders/impl/node/readmeGenerators.ts" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.generatePackages">
     <configuration name="bank-service-grpc-web-proxy/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
@@ -74,8 +66,19 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="generatePackages" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/example/lerna/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="generatePackages" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.generatePackages" />
         <item itemvalue="Docker.bank-service-grpc-web-proxy/Dockerfile" />
       </list>
     </recent_temporary>
@@ -88,8 +91,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1639985077378</updated>
-      <workItem from="1639985078933" duration="46247000" />
+      <workItem from="1639985078933" duration="63016000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial commit; functioning generators for node server/client, browser client, and grpc proxy">
+      <created>1640321876252</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1640321876252</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -105,5 +116,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit; functioning generators for node server/client, browser client, and grpc proxy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit; functioning generators for node server/client, browser client, and grpc proxy" />
   </component>
 </project>

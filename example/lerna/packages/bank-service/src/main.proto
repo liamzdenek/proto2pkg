@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+service BankService {
+  rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse) {}
+}
+
+message GetBalanceRequest {
+  string accountId = 1;
+}
+message GetBalanceResponse {
+  string accountId = 1;
+  sint64 balance = 2;
+}

@@ -1,35 +1,50 @@
-import {BuildContext, Builder, PackageNameStyle} from "../Builder";
-import {constants as fs_constants, promises as fs} from 'fs';
+import {BuildContext, Builder, PackageNameStyle} from "../../Builder";
+import {promises as fs} from 'fs';
 import * as path from 'path';
-import {execShellCommand} from "../../util/execShellCommand";
-import {checkBinExists} from "../../util/checkBinExists";
-import {generateReadmeText} from "../../util/generateReadme";
+import {execShellCommand} from "../../../util/execShellCommand";
+import {resolveBinExists} from "../../../util/checkBinExists";
+import {
+    readmeGeneratorBrowserClientGprcWeb,
+    readmeGeneratorNodeClient,
+    readmeGeneratorNodeServer
+} from "./readmeGenerators";
 
-const PROTOC_BIN = "./node_modules/.bin/protoc";
-const TS_PROTO_PLUGIN_BIN = "./node_modules/ts-proto/protoc-gen-ts_proto"
+const PROTOC_BIN_PROMISE = resolveBinExists("protoc");
+const TS_PROTO_PLUGIN_BIN_PROMISE = resolveBinExists("protoc-gen-ts_proto");
 
 // ./node_modules/.bin/protoc --plugin=protoc-gen-grpc=./node_modules/.bin/grpc_tools_node_protoc_plugin -I=src --ts_out=dist src/*.proto
 // ./node_modules/.bin/protoc --plugin=node_modules/ts-proto/protoc-gen-ts_proto ./example/bank-service/src/*.proto -I ./example/bank-service --ts_proto_out=./example/bank-service/dist
-interface TsProtoBuilderConfig {
+export interface TsProtoBuilderConfig {
     args: string[],
     grpcWeb?: boolean,
     readmeGenerator: (ctx: BuildContext, cfg: TsProtoBuilderConfig) => string;
+    extraPeerDeps?: ExtraDeps;
 }
+
+interface ExtraDeps { [k: string]: string }
 
 const createTsProtoBuilder = (cfg: TsProtoBuilderConfig): Builder => {
     return {
         packageNameStyle: PackageNameStyle.SnakeCase,
         async checkPrerequisites(ctx) {
             let errors: Error[] = [];
-            await checkBinExists(PROTOC_BIN, errors);
-            await checkBinExists(TS_PROTO_PLUGIN_BIN, errors);
+            console.log('dirname', __dirname);
+            try {
+                const PROTOC_BIN = await PROTOC_BIN_PROMISE;
+                const TS_PROTO_PLUGIN_BIN = await TS_PROTO_PLUGIN_BIN_PROMISE;
+                console.log('PROTOC_BIN', PROTOC_BIN);
+            } catch(newErrors: any) {
+                errors.push(...newErrors);
+            }
             return errors;
         },
         async build(ctx) {
             console.log('dist dir', ctx.thisBuildContext.distDir);
             const protoFiles = path.join(ctx.sourceDir, "/src/main.proto");
-            await execShellCommand(ctx, path.join(process.cwd(), PROTOC_BIN), [
-                `--plugin=${path.join(process.cwd(), TS_PROTO_PLUGIN_BIN)}`,
+            const PROTOC_BIN = await PROTOC_BIN_PROMISE;
+            const TS_PROTO_PLUGIN_BIN = await TS_PROTO_PLUGIN_BIN_PROMISE;
+            await execShellCommand(ctx, PROTOC_BIN, [
+                `--plugin=${TS_PROTO_PLUGIN_BIN}`,
                 protoFiles,
                 `-I${ctx.sourceDir}`,
                 `--ts_proto_out=${ctx.thisBuildContext.distDir}`,
@@ -50,70 +65,19 @@ const createTsProtoBuilder = (cfg: TsProtoBuilderConfig): Builder => {
 }
 
 
-const readmeGeneratorNodeServer = (ctx: BuildContext, cfg: TsProtoBuilderConfig) => generateReadmeText(ctx, (
-`
-(Relevant documentation for nice-grpc)[https://github.com/deeplay-io/nice-grpc/tree/master/packages/nice-grpc]. Note that
-we are using ts-proto, not google-protobuf.
-
-For each \`service\` definition in your proto files, there will be a corresponding \`[ServiceName]Definition\` object
-within the compiled code. If you have a protoc definition like this, the below typescript is a valid server implementation.
-\`\`\`proto
-service ExampleService {
-    rpc exampleUnaryMethod(ExampleRequest) returns (ExampleResponse) {}
-}
-\`\`\`
-\`\`\`ts
-import {ServiceImplementation} from 'nice-grpc';
-import {
-  ExampleServiceDefinition,
-  ExampleRequest,
-  ExampleResponse,
-  DeepPartial,
-} from '${ctx.thisBuildContext.packageName}';
-
-const exampleServiceImpl: ServiceImplementation<
-  typeof ExampleServiceDefinition
-> = {
-  async exampleUnaryMethod(
-    request: ExampleRequest,
-  ): Promise<DeepPartial<ExampleResponse>> {
-    // ... method logic
-
-    return response;
-  },
-};
-
-// you may implement multiple services within the same process/port, depending on your application architecture
-server.add(ExampleServiceDefinition, exampleServiceImpl);
-
-await server.listen('0.0.0.0:8080');
-
-process.on('SIGINT', async () => {
-    await server.shutdown();
-    process.exit();
-});
-\`\`\`
-`))
-
-const readmeGeneratorNodeClient = (ctx: BuildContext, cfg: TsProtoBuilderConfig) => generateReadmeText(ctx, (
-`\`\`\`ts
-
-\`\`\`
-`))
-
-const readmeGeneratorBrowserClientGprcWeb = (ctx: BuildContext, cfg: TsProtoBuilderConfig) => generateReadmeText(ctx, (
-`\`\`\`ts
-
-\`\`\`
-`))
-
 export const NodeServer: Builder = createTsProtoBuilder({
     args: [`--ts_proto_opt=env=node,outputClientImpl=false,outputServerImpl=true,outputServices=generic-definitions,forceLong=long`],
-    readmeGenerator: readmeGeneratorNodeServer
+    readmeGenerator: readmeGeneratorNodeServer,
+    extraPeerDeps: {
+        "nice-grpc": "^1.0.4",
+    }
 });
 export const NodeClient: Builder = createTsProtoBuilder({
-    args: [`--ts_proto_opt=env=node,outputClientImpl=true,outputServerImpl=false,forceLong=long`],
-    readmeGenerator: readmeGeneratorNodeClient
+    args: [`--ts_proto_opt=env=node,outputClientImpl=true,outputServices=generic-definitions,outputServerImpl=false,returnObservable=true,forceLong=long`],
+    readmeGenerator: readmeGeneratorNodeClient,
+    extraPeerDeps: {
+        "nice-grpc": "^1.0.4",
+    }
 });
 export const BrowserClientGrpcWeb: Builder = createTsProtoBuilder({
     args: [`--ts_proto_opt=env=browser,outputServerImpl=false,outputClientImpl=grpc-web,forceLong=long`],
@@ -142,8 +106,8 @@ const generatePackageJson = (ctx: BuildContext, cfg: TsProtoBuilderConfig): stri
         "name": ctx.thisBuildContext.packageName,
         "version": "0.0.1",
         "description": "",
-        "main": "dist/index.js",
-        "types": "dist/index.d.ts",
+        "main": "dist/main.js",
+        "types": "dist/main.d.ts",
         "scripts": {
             "build": "tsc"
         },
@@ -156,7 +120,8 @@ const generatePackageJson = (ctx: BuildContext, cfg: TsProtoBuilderConfig): stri
             ...(!cfg.grpcWeb ? {} : {
                 "@improbable-eng/grpc-web": "^0.15.0",
                 "browser-headers": "^0.4.1"
-            })
+            }),
+            ...(cfg.extraPeerDeps ? cfg.extraPeerDeps : {})
         }
     }, null, 2);
 }
