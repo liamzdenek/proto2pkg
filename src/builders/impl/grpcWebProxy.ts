@@ -4,7 +4,7 @@ import * as path from "path";
 import {generateReadmeText} from "../../util/generateReadme";
 
 export const GrpcWebProxy: Builder = {
-    packageNameStyle: PackageNameStyle.SnakeCase,
+    packageNameStyle: PackageNameStyle.SnakeCaseDashes,
     async checkPrerequisites(ctx) {
         return [];
     },

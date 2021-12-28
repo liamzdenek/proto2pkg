@@ -14,7 +14,7 @@ interface ExtraDeps { [k: string]: string }
 
 const createPythonProtoBuilder = (cfg: PyProtoBuilderConfig): Builder => {
     return {
-        packageNameStyle: PackageNameStyle.SnakeCase,
+        packageNameStyle: PackageNameStyle.SnakeCaseUnderscores,
         async checkPrerequisites(ctx) {
             let errors: Error[] = [];
             console.log('dirname', __dirname);
@@ -64,7 +64,46 @@ const createPythonProtoBuilder = (cfg: PyProtoBuilderConfig): Builder => {
 }
 
 const pythonReadmeGenerator = (ctx: BuildContext) => generateReadmeText(ctx,
-`
+`#### Server Implementation
+
+For each defined service, there will be a \`[serviceName]Servicer\` class which you should extend and override all members of.
+
+The below example uses a service named ExampleService, like this:
+
+\`\`\`proto
+service ExampleService {
+    rpc exampleUnaryMethod(ExampleRequest) returns (ExampleResponse) {}
+}
+\`\`\`
+\`\`\`python3
+import sys
+import os
+import grpc
+from concurrent import futures
+
+# you probably want to handle this import through a real package manager
+sys.path.append(os.path.dirname(os.path.realpath(__file__))+"/src")
+from ${ctx.thisBuildContext.packageName} import main_pb2 # protoc (does not include services, just the types)
+from ${ctx.thisBuildContext.packageName} import main_pb2_grpc # grpc (includes the service definitions, depends upon above line)
+
+class ExampleServiceServicer(main_pb2_grpc.ExampleServiceServicer):
+    def exampleUnaryMethod(self, request, context):
+        # request is of type ExampleRequest
+        return main_pb2.ExampleResponse(echoField=request.echoField)
+        
+def serve():
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    main_pb2_grpc.add_ExampleServiceServicer_to_server(
+        ExampleServiceServicer(), server)
+    server.add_insecure_port('[::]:9090')
+    server.start()
+    server.wait_for_termination()
+
+if __name__ == '__main__':
+    serve()
+\`\`\`
+
+#### Client Implementation
 `)
 
 export const Python3Dual = createPythonProtoBuilder({

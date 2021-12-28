@@ -6,7 +6,8 @@ export interface Builder {
 
 export enum PackageNameStyle {
     CamelCase = "CamelCase",
-    SnakeCase = "snake_case"
+    SnakeCaseDashes = "snake-case-dashes",
+    SnakeCaseUnderscores = "snake_case_underscores"
 }
 
 export interface BuildResult {

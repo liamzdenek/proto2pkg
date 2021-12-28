@@ -5,7 +5,11 @@ import { URL } from 'url';
 import * as path from 'path';
 import {promises as fs} from 'fs';
 import {BuildContext, builders, PackageNameStyle, Proto2PkgJson} from '../builders';
-import {camelToSnakeCase, normalizeToCamelCase} from "../util/string-case-normalization";
+import {
+    camelToSnakeCaseDashes,
+    camelToSnakeCaseUnderscores,
+    normalizeToCamelCase
+} from "../util/string-case-normalization";
 import { valid as semverValid } from 'semver';
 import {execShellCommand} from "../util/execShellCommand";
 import {downloadProtocAndGrpcPlugins} from "../util/downloadProtoc";
@@ -79,7 +83,13 @@ export const build = command({
        for(let [builderName, builder] of Object.entries(builders)) {
            const packageDir = ctx.sourceDir.replace(/[\/]$/, "");
            const packageNameCamelCase = normalizeToCamelCase(packageDir.slice(packageDir.lastIndexOf("/")+1)) + builderName;
-           const packageName = builder.packageNameStyle === PackageNameStyle.CamelCase ? packageNameCamelCase : camelToSnakeCase(packageNameCamelCase);
+           const packageName = (() => { switch(builder.packageNameStyle) {
+               case PackageNameStyle.CamelCase: return packageNameCamelCase;
+               case PackageNameStyle.SnakeCaseDashes: return camelToSnakeCaseDashes(packageNameCamelCase);
+               case PackageNameStyle.SnakeCaseUnderscores: return camelToSnakeCaseUnderscores(packageNameCamelCase);
+               // no default case ! all PackageNameStyles should be handled
+           }
+           })();
            ctx.thisBuildContext = {
                distDir: path.join(ctx.sharedDistDir, "/", packageName),
                packageName,

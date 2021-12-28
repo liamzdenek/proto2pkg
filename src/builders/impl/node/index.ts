@@ -24,7 +24,7 @@ interface ExtraDeps { [k: string]: string }
 
 const createTsProtoBuilder = (cfg: TsProtoBuilderConfig): Builder => {
     return {
-        packageNameStyle: PackageNameStyle.SnakeCase,
+        packageNameStyle: PackageNameStyle.SnakeCaseDashes,
         async checkPrerequisites(ctx) {
             let errors: Error[] = [];
             try {
