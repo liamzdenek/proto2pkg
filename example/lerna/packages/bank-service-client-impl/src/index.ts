@@ -3,7 +3,7 @@ import {
     BankServiceDefinition
 } from 'bank-service-node-client';
 
-const channel = createChannel('localhost:8080');
+const channel = createChannel('localhost:9090');
 
 const client: Client<typeof BankServiceDefinition> = createClient(
     BankServiceDefinition,

@@ -12,8 +12,6 @@ const exampleServiceImpl: ServiceImplementation<
     async getBalance(
         request: GetBalanceRequest,
     ): Promise<DeepPartial<GetBalanceResponse>> {
-        // ... method logic
-
         return {
             accountId: request.accountId,
             balance: 44,
@@ -28,7 +26,7 @@ server.add(BankServiceDefinition, exampleServiceImpl);
 
 (async () => {
     console.log('server running');
-    await server.listen('0.0.0.0:8080');
+    await server.listen('0.0.0.0:9090');
 })()
 
 process.on('SIGINT', async () => {

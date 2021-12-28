@@ -7,8 +7,8 @@
 1. [`bank-service` can be found here.](https://github.com/liamzdenek/proto2pkg/example/bank-service)
 1. At the time this package was generated:
     1. The `bank-service` version was: `0.0.1`
-    1. The `bank-service` commit hash was: `c5bd7dca9796fbbc0f0d1099f3ff45d5ae082bd6`
-    1. The build occurred at: 2021-12-26T04:00:23.562Z
+    1. The `bank-service` commit hash was: `bbd524dde886656f00e413fa01139084dc1596be`
+    1. The build occurred at: 2021-12-28T07:12:25.022Z
 1. Below, you can find instructions regarding the generator for this package.
 
 ## BrowserClientGrpcWeb

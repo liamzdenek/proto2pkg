@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8e6456d-96a9-4d5d-96d6-682e8a9dba67" name="Default Changelist" comment="Initial commit; functioning generators for node server/client, browser client, and grpc proxy">
-      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service-client-impl/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service-client-impl/src/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service-server-impl/src/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service/proto2pkg.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service/src/main.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/builders/impl/node/readmeGenerators.ts" afterDir="false" />
+    <list default="true" id="a8e6456d-96a9-4d5d-96d6-682e8a9dba67" name="Default Changelist" comment="feat: lerna integration + related fixes + lerna example">
+      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service-browser-client-impl/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service-browser-client-impl/src/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service-browser-client-impl/webpack.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lerna/genPackages/bank-service-browser-client-grpc-web/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/example/lerna/genPackages/bank-service-browser-client-grpc-web/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lerna/genPackages/bank-service-grpc-web-proxy/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/example/lerna/genPackages/bank-service-grpc-web-proxy/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lerna/genPackages/bank-service-grpc-web-proxy/entrypoint.sh" beforeDir="false" afterPath="$PROJECT_DIR$/example/lerna/genPackages/bank-service-grpc-web-proxy/entrypoint.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lerna/genPackages/bank-service-node-client/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/example/lerna/genPackages/bank-service-node-client/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lerna/genPackages/bank-service-node-server/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/example/lerna/genPackages/bank-service-node-server/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lerna/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/example/lerna/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lerna/packages/bank-service-client-impl/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service-client-impl/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lerna/packages/bank-service-server-impl/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/example/lerna/packages/bank-service-server-impl/src/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builders/impl/node.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/impl/node/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmd/build.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmd/build.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/builders/impl/grpcWebProxy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/impl/grpcWebProxy.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/checkBinExists.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/checkBinExists.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/generateReadme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/generateReadme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +27,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="22XXo7RBjpt34WQlGDdbPW69PUk" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -91,7 +102,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1639985077378</updated>
-      <workItem from="1639985078933" duration="63016000" />
+      <workItem from="1639985078933" duration="76722000" />
+      <workItem from="1640669275424" duration="4452000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit; functioning generators for node server/client, browser client, and grpc proxy">
       <created>1640321876252</created>
@@ -100,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640321876252</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: lerna integration + related fixes + lerna example">
+      <created>1640493324337</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1640493324337</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,9 +135,11 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit; functioning generators for node server/client, browser client, and grpc proxy" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit; functioning generators for node server/client, browser client, and grpc proxy" />
+    <MESSAGE value="feat: lerna integration + related fixes + lerna example" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: lerna integration + related fixes + lerna example" />
   </component>
 </project>

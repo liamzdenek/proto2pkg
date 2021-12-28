@@ -1,0 +1,21 @@
+{
+  "name": "bank-service-browser-client-impl",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server"
+  },
+  "author": "",
+  "dependencies": {
+    "bank-service-browser-client-grpc-web": "*",
+    "@improbable-eng/grpc-web": "^0.15.0"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.4",
+    "webpack": "^5.65.0",
+    "webpack-dev-server": "^4.7.1"
+  }
+}

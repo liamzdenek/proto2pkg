@@ -6,5 +6,6 @@ RUN unzip grpcwebproxy.zip
 RUN mv dist/grpcwebproxy-* /bin/grpcwebproxy
 RUN apk --purge del apk-tools wget unzip
 ADD entrypoint.sh /bin/
+RUN chmod +x /bin/entrypoint.sh
 
 ENTRYPOINT /bin/entrypoint.sh
