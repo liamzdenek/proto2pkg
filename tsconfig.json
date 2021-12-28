@@ -22,7 +22,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es2015",
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": ["node_modules/@types", "node_modules/@polvtypes"],
     "lib": ["es2018", "dom"],
 	"esModuleInterop": false,
 	"resolveJsonModule": true

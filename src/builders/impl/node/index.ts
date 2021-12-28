@@ -2,15 +2,14 @@ import {BuildContext, Builder, PackageNameStyle} from "../../Builder";
 import {promises as fs} from 'fs';
 import * as path from 'path';
 import {execShellCommand} from "../../../util/execShellCommand";
-import {resolveBinExists} from "../../../util/checkBinExists";
+import {resolveNodeModulesBin} from "../../../util/resolveNodeModulesBin";
 import {
     readmeGeneratorBrowserClientGprcWeb,
     readmeGeneratorNodeClient,
     readmeGeneratorNodeServer
 } from "./readmeGenerators";
 
-const PROTOC_BIN_PROMISE = resolveBinExists("protoc");
-const TS_PROTO_PLUGIN_BIN_PROMISE = resolveBinExists("protoc-gen-ts_proto");
+import {PROTOC_BIN_PROMISE, TS_PROTO_PLUGIN_BIN_PROMISE} from "../common";
 
 // ./node_modules/.bin/protoc --plugin=protoc-gen-grpc=./node_modules/.bin/grpc_tools_node_protoc_plugin -I=src --ts_out=dist src/*.proto
 // ./node_modules/.bin/protoc --plugin=node_modules/ts-proto/protoc-gen-ts_proto ./example/bank-service/src/*.proto -I ./example/bank-service --ts_proto_out=./example/bank-service/dist
@@ -28,18 +27,15 @@ const createTsProtoBuilder = (cfg: TsProtoBuilderConfig): Builder => {
         packageNameStyle: PackageNameStyle.SnakeCase,
         async checkPrerequisites(ctx) {
             let errors: Error[] = [];
-            console.log('dirname', __dirname);
             try {
                 const PROTOC_BIN = await PROTOC_BIN_PROMISE;
                 const TS_PROTO_PLUGIN_BIN = await TS_PROTO_PLUGIN_BIN_PROMISE;
-                console.log('PROTOC_BIN', PROTOC_BIN);
             } catch(newErrors: any) {
                 errors.push(...newErrors);
             }
             return errors;
         },
         async build(ctx) {
-            console.log('dist dir', ctx.thisBuildContext.distDir);
             const protoFiles = path.join(ctx.sourceDir, "/src/main.proto");
             const PROTOC_BIN = await PROTOC_BIN_PROMISE;
             const TS_PROTO_PLUGIN_BIN = await TS_PROTO_PLUGIN_BIN_PROMISE;

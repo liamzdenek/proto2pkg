@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently npm:dev:build npm:dev:run",
     "dev:build": "webpack --mode=development --watch",
-    "dev:run": "nodemon -e js -w ./build/ -w ./example/ -i ./example/*/dist -x \"./build/proto2pkg build example/bank-service\""
+    "dev:run": "nodemon -e js -w ./build/proto2pkg -w ./example/ -i ./example/*/dist -x \"./build/proto2pkg build example/bank-service\""
   },
   "bin": {
     "proto2pkg": "build/proto2pkg"
@@ -35,13 +35,17 @@
     "webpack-shell-plugin-next": "^2.2.2"
   },
   "dependencies": {
+    "@polvtypes/appdirs": "^1.1.1",
     "@types/cli-color": "^2.0.2",
+    "@types/node-fetch": "^3.0.3",
     "@types/semver": "^7.3.9",
     "@types/split": "^1.0.0",
     "ajv": "^6.12.6",
+    "appdirs": "^1.1.0",
     "cli-color": "^2.0.1",
     "cmd-ts": "^0.8.0",
     "execa": "^6.0.0",
+    "node-fetch": "^3.1.0",
     "protoc-tools": "^3.11.3",
     "regenerator-runtime": "^0.13.9",
     "semver": "^7.3.5",

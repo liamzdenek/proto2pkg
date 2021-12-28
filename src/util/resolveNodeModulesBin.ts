@@ -1,7 +1,7 @@
 import {constants as fs_constants, promises as fs} from "fs";
 import * as path from 'path';
 
-export async function resolveBinExists(bin: string): Promise<string> {
+export async function resolveNodeModulesBin(bin: string): Promise<string> {
     let errors: Error[] = [];
     let possibleDir = __dirname;
     do {
