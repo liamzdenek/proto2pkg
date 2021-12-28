@@ -1,7 +1,6 @@
 import {BuildContext, Builder, PackageNameStyle} from "../Builder";
 import {promises as fs} from "fs";
 import * as path from "path";
-import {execShellCommand} from "../../util/execShellCommand";
 import {generateReadmeText} from "../../util/generateReadme";
 
 export const GrpcWebProxy: Builder = {
@@ -9,16 +8,21 @@ export const GrpcWebProxy: Builder = {
     async checkPrerequisites(ctx) {
         return [];
     },
-    async build(ctx) {
+    async generatePackage(ctx) {
         await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "entrypoint.sh"), generateEntrypoint(ctx));
         await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "Dockerfile"), generateDockerfile(ctx));
         await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "README.md"), readmeGeneratorGrpcWebProxy(ctx));
-        await execShellCommand(ctx,"docker", ["build", "."], ctx.thisBuildContext.distDir);
+        await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "build.sh"), generateBuildSh(ctx));
         return {
             errors: []
         };
     }
 }
+
+const generateBuildSh = (ctx: BuildContext) => (
+`#!/usr/bin/env bash
+docker build .
+`);
 
 const generateDockerfile = (ctx: BuildContext): string => (
 `FROM alpine:3.15

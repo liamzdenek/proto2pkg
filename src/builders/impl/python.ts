@@ -3,6 +3,7 @@ import * as path from "path";
 import {execShellCommand} from "../../util/execShellCommand";
 import {promises as fs} from "fs";
 import {PROTOC_BIN_PROMISE, GRPC_PYTHON_PLUGIN_BIN_PROMISE} from "./common";
+import {generateReadmeText} from "../../util/generateReadme";
 
 export interface PyProtoBuilderConfig {
     args: string[],
@@ -25,7 +26,7 @@ const createPythonProtoBuilder = (cfg: PyProtoBuilderConfig): Builder => {
             }
             return errors;
         },
-        async build(ctx) {
+        async generatePackage(ctx) {
             const protoFiles = path.join(ctx.sourceDir, "/src/main.proto");
             const PROTOC_BIN = await PROTOC_BIN_PROMISE;
             const GRPC_PYTHON_PLUGIN_BIN = await GRPC_PYTHON_PLUGIN_BIN_PROMISE;
@@ -46,22 +47,15 @@ const createPythonProtoBuilder = (cfg: PyProtoBuilderConfig): Builder => {
                 if(file === ctx.thisBuildContext.packageName) {
                     continue;
                 }
-                console.log('file', file);
-                await execShellCommand(ctx, "mv", [
+                await fs.rename(
                     path.join(ctx.thisBuildContext.distDir, "src", file),
-                    path.join(ctx.thisBuildContext.distDir, "src/", ctx.thisBuildContext.packageName)
-                ], ctx.thisBuildContext.distDir);
-            }/*
-            await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "tsconfig.json"), generateTsconfig(ctx, cfg));
-            await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "package.json"), generatePackageJson(ctx, cfg));
-            await fs.writeFile(path.join(ctx.thisBuildContext.distDir, ".gitignore"), generateGitignore(ctx, cfg));
-            await fs.writeFile(path.join(ctx.thisBuildContext.distDir, ".npmignore"), generateNpmignore(ctx, cfg));
-            */
+                    path.join(ctx.thisBuildContext.distDir, "src/", ctx.thisBuildContext.packageName,"/",file)
+                )
+            }
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "README.md"), cfg.readmeGenerator(ctx,cfg));
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "pyproject.toml"), generatePyProjToml(ctx, cfg));
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "setup.cfg"), generateSetupCfg(ctx, cfg));
-            await execShellCommand(ctx, "python3", ["-m", "pip", "install", "--upgrade", "build"], ctx.thisBuildContext.distDir);
-            await execShellCommand(ctx, "python3", ["-m", "build"], ctx.thisBuildContext.distDir);
+            await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "build.sh"), generateBuildSh(ctx, cfg));
             return {
                 errors: []
             };
@@ -69,10 +63,20 @@ const createPythonProtoBuilder = (cfg: PyProtoBuilderConfig): Builder => {
     };
 }
 
-export const PythonDual = createPythonProtoBuilder({
+const pythonReadmeGenerator = (ctx: BuildContext) => generateReadmeText(ctx,
+`
+`)
+
+export const Python3Dual = createPythonProtoBuilder({
     args: [],
-    readmeGenerator: ctx => ""
+    readmeGenerator: pythonReadmeGenerator
 })
+
+const generateBuildSh = (ctx: BuildContext, cfg: PyProtoBuilderConfig) => (
+`#!/usr/bin/env bash
+python3 -m pip install --upgrade build
+python3 -m build
+`);
 
 const generatePyProjToml = (ctx: BuildContext, cfg: PyProtoBuilderConfig) => (
 `requires = [

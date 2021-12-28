@@ -28,14 +28,14 @@ const createTsProtoBuilder = (cfg: TsProtoBuilderConfig): Builder => {
         async checkPrerequisites(ctx) {
             let errors: Error[] = [];
             try {
-                const PROTOC_BIN = await PROTOC_BIN_PROMISE;
-                const TS_PROTO_PLUGIN_BIN = await TS_PROTO_PLUGIN_BIN_PROMISE;
+                await PROTOC_BIN_PROMISE;
+                await TS_PROTO_PLUGIN_BIN_PROMISE;
             } catch(newErrors: any) {
                 errors.push(...newErrors);
             }
             return errors;
         },
-        async build(ctx) {
+        async generatePackage(ctx) {
             const protoFiles = path.join(ctx.sourceDir, "/src/main.proto");
             const PROTOC_BIN = await PROTOC_BIN_PROMISE;
             const TS_PROTO_PLUGIN_BIN = await TS_PROTO_PLUGIN_BIN_PROMISE;
@@ -51,15 +51,18 @@ const createTsProtoBuilder = (cfg: TsProtoBuilderConfig): Builder => {
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, ".gitignore"), generateGitignore(ctx, cfg));
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, ".npmignore"), generateNpmignore(ctx, cfg));
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "README.md"), cfg.readmeGenerator(ctx,cfg));
-            await execShellCommand(ctx, "npm", ["install"], ctx.thisBuildContext.distDir);
-            await execShellCommand(ctx, "npm", ["run", "build"], ctx.thisBuildContext.distDir);
+            await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "build.sh"), generateBuildSh(ctx, cfg));
             return {
                 errors: []
             };
         }
     };
 }
-
+const generateBuildSh = (ctx: BuildContext, cfg: TsProtoBuilderConfig) => (
+`#!/usr/bin/env bash
+npm install
+npm run build
+`);
 
 export const NodeServer: Builder = createTsProtoBuilder({
     args: [`--ts_proto_opt=env=node,outputClientImpl=false,outputServerImpl=true,outputServices=generic-definitions,forceLong=long`],

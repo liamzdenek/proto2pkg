@@ -1,4 +1,4 @@
-import {command, option, optional, positional} from 'cmd-ts';
+import {boolean, command, option, optional, positional, array, flag} from 'cmd-ts';
 import {Directory} from 'cmd-ts/dist/cjs/batteries/fs';
 import {Url} from 'cmd-ts/dist/cjs/batteries/url';
 import { URL } from 'url';
@@ -33,7 +33,12 @@ export const build = command({
             defaultValue(): URL {
                 return new URL(DEFAULT_PROTOC_URL);
             }
-
+        }),
+        noBuild: flag({
+            long: "noBuild",
+            type: boolean,
+            description: "When false (default), the 'build.sh' script in each package will be executed. When true, only the packages will be written, not built.",
+            defaultValue(): boolean { return true; }
         })
     },
     handler: async args => {
@@ -50,8 +55,13 @@ export const build = command({
            },
            proto2pkgJson: await loadProto2PkgJson(path.join(args.sourceDir, "/proto2pkg.json")),
        };
+
+       // download the protoc and grpc plugins because they'll be used
+       // by the various builders
        await downloadProtocAndGrpcPlugins(args.protocUrl.toString());
        console.log('context', ctx);
+
+       // validate the prerequisites contain no errors
        const prereqs = await Promise.all(
            Object.entries(builders)
                .map(async entry => [entry[0], await entry[1].checkPrerequisites(ctx)])
@@ -63,6 +73,9 @@ export const build = command({
            throw new Error("Error in prerequisites of '"+prereq[0]+"': "+JSON.stringify(prereq[1]))
        }
 
+       // clean any prior builds
+       await fs.rm(ctx.sharedDistDir, { recursive: true });
+
        for(let [builderName, builder] of Object.entries(builders)) {
            const packageDir = ctx.sourceDir.replace(/[\/]$/, "");
            const packageNameCamelCase = normalizeToCamelCase(packageDir.slice(packageDir.lastIndexOf("/")+1)) + builderName;
@@ -72,8 +85,14 @@ export const build = command({
                packageName,
                builderName
            }
+           // generate the package
            await fs.mkdir(ctx.thisBuildContext.distDir,{ recursive: true });
-           await builder.build(ctx);
+           await builder.generatePackage(ctx);
+           await execShellCommand(ctx, "chmod", ["+x", "./build.sh"], ctx.thisBuildContext.distDir);
+           // and optionally build the package
+           if(!args.noBuild) {
+               await execShellCommand(ctx, "./build.sh", [], ctx.thisBuildContext.distDir);
+           }
        }
     },
 });

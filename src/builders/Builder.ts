@@ -1,7 +1,7 @@
 export interface Builder {
     packageNameStyle: PackageNameStyle;
     checkPrerequisites: { (ctx: BuildContext): Promise<Error[]> }
-    build: { (ctx: BuildContext): Promise<BuildResult> }
+    generatePackage: { (ctx: BuildContext): Promise<BuildResult> }
 }
 
 export enum PackageNameStyle {
