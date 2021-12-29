@@ -47,6 +47,16 @@ const createPythonProtoBuilder = (cfg: PyProtoBuilderConfig): Builder => {
                 if(file === ctx.thisBuildContext.packageName) {
                     continue;
                 }
+
+                // refactor the source to handle packaging related imports
+                if(file.endsWith("pb2.py") || file.endsWith("pb2_grpc.py")) {
+                    console.log("rewriting contents of "+file);
+                    let contents = (await fs.readFile(path.join(ctx.thisBuildContext.distDir, "src", file))).toString();
+                    contents = contents.replace(/^from src import /gm, "from . import ");
+                    console.log("new contents ", contents);
+                    await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "src", file), contents);
+                }
+
                 await fs.rename(
                     path.join(ctx.thisBuildContext.distDir, "src", file),
                     path.join(ctx.thisBuildContext.distDir, "src/", ctx.thisBuildContext.packageName,"/",file)
@@ -56,6 +66,7 @@ const createPythonProtoBuilder = (cfg: PyProtoBuilderConfig): Builder => {
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "pyproject.toml"), generatePyProjToml(ctx, cfg));
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "setup.cfg"), generateSetupCfg(ctx, cfg));
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "build.sh"), generateBuildSh(ctx, cfg));
+
             return {
                 errors: []
             };
@@ -64,7 +75,20 @@ const createPythonProtoBuilder = (cfg: PyProtoBuilderConfig): Builder => {
 }
 
 const pythonReadmeGenerator = (ctx: BuildContext) => generateReadmeText(ctx,
-`#### Server Implementation
+`#### Importing guide
+
+If this package is published in a repository separately from the service that generated it (private or public), [follow
+the pip VCS instructions](https://pip.pypa.io/en/stable/topics/vcs-support/).
+
+If this package is published in the same repository that contains the proto2pkg.json (eg, by \`git add\`ing the \`dist\`
+folder from executing proto2pkg, then follow the same instructions as above, [but you must specify the correct subdirectory
+and egg](https://pip.pypa.io/en/stable/topics/vcs-support/#url-fragments), which should point to the directory containing
+setup.cfg (this directory).
+
+If you're using a build pipeline that publishes this package to, eg, artifactory or nexus, [follow the repository manager
+instructions](https://docs.readthedocs.io/en/stable/guides/private-python-packages.html#from-a-repository-manager-other-than-pypi).
+
+#### Server Implementation
 
 For each defined service, there will be a \`[serviceName]Servicer\` class which you should extend and override all members of.
 
@@ -104,6 +128,44 @@ if __name__ == '__main__':
 \`\`\`
 
 #### Client Implementation
+
+For each defined service, there will be a \`[serviceName]Stub\` class which you should instantiate. This is your client
+object. Why is it called stub? 🤷 ¯\\_(ツ)_/¯ It's a client.
+
+
+
+\`\`\`proto
+service ExampleService {
+    rpc exampleUnaryMethod(ExampleRequest) returns (ExampleResponse) {}
+}
+\`\`\`
+\`\`\`python3
+import sys
+import os
+import grpc
+from concurrent import futures
+
+# you probably want to handle this import through a real package manager
+sys.path.append(os.path.dirname(os.path.realpath(__file__))+"/src")
+from ${ctx.thisBuildContext.packageName} import main_pb2 # protoc (does not include services, just the types)
+from ${ctx.thisBuildContext.packageName} import main_pb2_grpc # grpc (includes the service definitions, depends upon above line)
+
+
+channel = grpc.insecure_channel('localhost:9090')
+stub = main_pb2_grpc.ExampleServiceStub(channel)
+
+# synchronous call
+response = stub.exampleUnaryMethod(main_pb2.ExampleRequest(echoField="bobby"))
+print("Response")
+print(response) # type = ExampleResponse
+
+# or, asynchronous call
+future = stub.exampleUnaryMethod.future(main_pb2.ExampleRequest(echoField="bobby2"))
+
+response = future.result()
+print("Response")
+print(response) # type = ExampleResponse
+\`\`\`
 `)
 
 export const Python3Dual = createPythonProtoBuilder({
