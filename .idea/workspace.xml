@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8e6456d-96a9-4d5d-96d6-682e8a9dba67" name="Default Changelist" comment="fix: small fixes to Python3Dual + half the docs">
+    <list default="true" id="a8e6456d-96a9-4d5d-96d6-682e8a9dba67" name="Default Changelist" comment="fix: python3 &quot;from src import&quot; should be relative. + more docs">
+      <change afterPath="$PROJECT_DIR$/src/cmd/languages.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/getSupportedLanguages.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/builders/Builder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/Builder.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/builders/impl/grpcWebProxy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/impl/grpcWebProxy.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/builders/impl/node/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/impl/node/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/builders/impl/python.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/impl/python.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cmd/build.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmd/build.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +96,7 @@
       <option name="presentableId" value="Default" />
       <updated>1639985077378</updated>
       <workItem from="1639985078933" duration="76722000" />
-      <workItem from="1640669275424" duration="29067000" />
+      <workItem from="1640669275424" duration="33133000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit; functioning generators for node server/client, browser client, and grpc proxy">
       <created>1640321876252</created>
@@ -132,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640699426371</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix: python3 &quot;from src import&quot; should be relative. + more docs">
+      <created>1640781231422</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1640781231422</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,6 +173,7 @@
     <MESSAGE value="feat: PythonDual builder + no longer sourcing protoc from npm" />
     <MESSAGE value="feat: &quot;--noBuild&quot; flag, separating the package generation from package building" />
     <MESSAGE value="fix: small fixes to Python3Dual + half the docs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: small fixes to Python3Dual + half the docs" />
+    <MESSAGE value="fix: python3 &quot;from src import&quot; should be relative. + more docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: python3 &quot;from src import&quot; should be relative. + more docs" />
   </component>
 </project>

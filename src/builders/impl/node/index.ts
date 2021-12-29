@@ -10,6 +10,7 @@ import {
 } from "./readmeGenerators";
 
 import {PROTOC_BIN_PROMISE, TS_PROTO_PLUGIN_BIN_PROMISE} from "../common";
+import {Languages} from "../../../util/getSupportedLanguages";
 
 // ./node_modules/.bin/protoc --plugin=protoc-gen-grpc=./node_modules/.bin/grpc_tools_node_protoc_plugin -I=src --ts_out=dist src/*.proto
 // ./node_modules/.bin/protoc --plugin=node_modules/ts-proto/protoc-gen-ts_proto ./example/bank-service/src/*.proto -I ./example/bank-service --ts_proto_out=./example/bank-service/dist
@@ -25,6 +26,7 @@ interface ExtraDeps { [k: string]: string }
 const createTsProtoBuilder = (cfg: TsProtoBuilderConfig): Builder => {
     return {
         packageNameStyle: PackageNameStyle.SnakeCaseDashes,
+        languages: [Languages.Typescript, Languages.Javascript, ...(cfg.grpcWeb ? [Languages.GrpcWeb] : [])],
         async checkPrerequisites(ctx) {
             let errors: Error[] = [];
             try {

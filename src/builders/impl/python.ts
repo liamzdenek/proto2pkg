@@ -2,8 +2,9 @@ import {BuildContext, Builder, PackageNameStyle} from "../Builder";
 import * as path from "path";
 import {execShellCommand} from "../../util/execShellCommand";
 import {promises as fs} from "fs";
-import {PROTOC_BIN_PROMISE, GRPC_PYTHON_PLUGIN_BIN_PROMISE} from "./common";
+import {GRPC_PYTHON_PLUGIN_BIN_PROMISE, PROTOC_BIN_PROMISE} from "./common";
 import {generateReadmeText} from "../../util/generateReadme";
+import {Languages} from "../../util/getSupportedLanguages";
 
 export interface PyProtoBuilderConfig {
     args: string[],
@@ -15,6 +16,7 @@ interface ExtraDeps { [k: string]: string }
 const createPythonProtoBuilder = (cfg: PyProtoBuilderConfig): Builder => {
     return {
         packageNameStyle: PackageNameStyle.SnakeCaseUnderscores,
+        languages: [Languages.Python3],
         async checkPrerequisites(ctx) {
             let errors: Error[] = [];
             console.log('dirname', __dirname);

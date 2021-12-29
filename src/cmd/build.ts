@@ -1,9 +1,9 @@
-import {boolean, command, option, optional, positional, array, flag} from 'cmd-ts';
+import {boolean, command, option, optional, positional, array, flag, string} from 'cmd-ts';
 import {Directory} from 'cmd-ts/dist/cjs/batteries/fs';
 import {Url} from 'cmd-ts/dist/cjs/batteries/url';
 import { URL } from 'url';
 import * as path from 'path';
-import {promises as fs} from 'fs';
+import {constants as fs_constants, promises as fs} from 'fs';
 import {BuildContext, builders, PackageNameStyle, Proto2PkgJson} from '../builders';
 import {
     camelToSnakeCaseDashes,
@@ -14,6 +14,8 @@ import { valid as semverValid } from 'semver';
 import {execShellCommand} from "../util/execShellCommand";
 import {downloadProtocAndGrpcPlugins} from "../util/downloadProtoc";
 import {getEphemeralContext} from "../util/ephemeralContext";
+import {generateEnumListType} from "../util/LanguageType";
+import {getSupportedLanguages, Languages} from "../util/getSupportedLanguages";
 
 const DEFAULT_PROTOC_URL = "https://packages.grpc.io/archive/2021/12/6ea821487923e63b3654990f4b30efe3a71c18ad-4b26a47a-d9db-4f9b-bc49-0926e6b85008/protoc/grpc-protoc_linux_x64-1.44.0-dev.tar.gz";
 
@@ -43,7 +45,14 @@ export const build = command({
             type: boolean,
             description: "When false (default), the 'build.sh' script in each package will be executed. When true, only the packages will be written, not built.",
             defaultValue(): boolean { return true; }
+        }),
+        languages: option({
+            type: generateEnumListType(Languages),
+            long: "languages",
+            // default to all the languages
+            defaultValue(): Set<typeof Languages> { return new Set(Object.values(Languages) as any); }
         })
+
     },
     handler: async args => {
        console.log('build args', args);
@@ -78,9 +87,20 @@ export const build = command({
        }
 
        // clean any prior builds
-       await fs.rm(ctx.sharedDistDir, { recursive: true });
+        try {
+            await fs.rm(ctx.sharedDistDir, {recursive: true});
+        } catch(e) {}
+       await fs.mkdir(ctx.sharedDistDir, { recursive: true });
 
        for(let [builderName, builder] of Object.entries(builders)) {
+           if(
+               // if the builder's languages are all not in the requested list of languages
+               builder.languages.every(lang => !args.languages.has(lang as any)) // no clue why it's coming through as "Set<typeof Languages>" which is causing the required any
+           ) {
+                console.log("Skipping build for "+builderName+" because it's not in the requested list of languages");
+                continue;
+           }
+
            const packageDir = ctx.sourceDir.replace(/[\/]$/, "");
            const packageNameCamelCase = normalizeToCamelCase(packageDir.slice(packageDir.lastIndexOf("/")+1)) + builderName;
            const packageName = (() => { switch(builder.packageNameStyle) {

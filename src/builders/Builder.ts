@@ -1,5 +1,8 @@
+import {Languages} from "../util/getSupportedLanguages";
+
 export interface Builder {
     packageNameStyle: PackageNameStyle;
+    languages: (Languages)[];
     checkPrerequisites: { (ctx: BuildContext): Promise<Error[]> }
     generatePackage: { (ctx: BuildContext): Promise<BuildResult> }
 }

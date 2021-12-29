@@ -2,9 +2,11 @@ import {BuildContext, Builder, PackageNameStyle} from "../Builder";
 import {promises as fs} from "fs";
 import * as path from "path";
 import {generateReadmeText} from "../../util/generateReadme";
+import {Languages} from "../../util/getSupportedLanguages";
 
 export const GrpcWebProxy: Builder = {
     packageNameStyle: PackageNameStyle.SnakeCaseDashes,
+    languages: [Languages.GrpcWeb],
     async checkPrerequisites(ctx) {
         return [];
     },
