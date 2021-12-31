@@ -4,7 +4,8 @@ export enum Languages {
     Typescript = "typescript",
     Javascript = "javascript",
     GrpcWeb = "grpc-web",
-    Python3 = "python3"
+    Python3 = "python3",
+    Golang = "golang"
 }
 
 export const getSupportedLanguages = (): typeof Languages => Languages;/*Object.values(builders)

@@ -83,7 +83,7 @@ export const build = command({
            if(prereq[1].length == 0) {
                continue;
            }
-           throw new Error("Error in prerequisites of '"+prereq[0]+"': "+JSON.stringify(prereq[1]))
+           throw new Error("Error in prerequisites of '"+prereq[0]+"': "+prereq[1].toString ? prereq[1].toString() : JSON.stringify(prereq[1]))
        }
 
        // clean any prior builds

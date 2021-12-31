@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option go_package = "github.com/liamzdenek/proto2pkg/example/bank-service/dist/bank_service_go_dual;pkg";
+
 service BankService {
   rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse) {}
 }

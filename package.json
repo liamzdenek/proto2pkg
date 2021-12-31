@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently npm:dev:build npm:dev:run",
     "dev:build": "webpack --mode=development --watch",
-    "dev:run": "nodemon -e js -w ./build/proto2pkg -w ./example/ -i ./example/*/dist -x \"./build/proto2pkg build example/bank-service\""
+    "dev:run": "nodemon -e js -w ./build/proto2pkg -w ./example/ -i ./example/*/dist -x \"./build/proto2pkg build example/bank-service --noBuild\""
   },
   "bin": {
     "proto2pkg": "build/proto2pkg"
