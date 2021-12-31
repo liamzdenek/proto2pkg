@@ -25,17 +25,17 @@ export const build = command({
     args: {
         sourceDir: positional({
             type: Directory,
-            displayName: "dir",
+            displayName: "sourceDir",
         }),
         distDir: option({
             type: optional(Directory),
             long: "distDir",
             description: "defaults to 'dist' subfolder inside the sourceDir",
         }),
-        protocUrl: option({
+        grpcBinUrl: option({
             type: Url,
-            long: "protocUrl",
-            description: "where to download the protoc binaries. defaults to: '"+DEFAULT_PROTOC_URL+"'",
+            long: "grpcBinUrl",
+            description: "where to download the grpc binaries. defaults to: '"+DEFAULT_PROTOC_URL+"'",
             defaultValue(): URL {
                 return new URL(DEFAULT_PROTOC_URL);
             }
@@ -43,7 +43,7 @@ export const build = command({
         noBuild: flag({
             long: "noBuild",
             type: boolean,
-            description: "When false (default), the 'build.sh' script in each package will be executed. When true, only the packages will be written, not built.",
+            description: "When this flag is present, proto2pkg will not execute the build.sh file in each package.",
             defaultValue(): boolean { return true; }
         }),
         languages: option({
@@ -71,7 +71,7 @@ export const build = command({
 
        // download the protoc and grpc plugins because they'll be used
        // by the various builders
-       await downloadProtocAndGrpcPlugins(args.protocUrl.toString());
+       await downloadProtocAndGrpcPlugins(args.grpcBinUrl.toString());
        console.log('context', ctx);
 
        // validate the prerequisites contain no errors

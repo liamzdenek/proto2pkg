@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "generatePackages": "../../build/proto2pkg build packages/bank-service --distDir=./genPackages/ && lerna bootstrap"
+    "generatePackages": "../../build/proto2pkg build packages/bank-service --distDir=./genPackages/ --languages=js,ts && lerna bootstrap"
   },
   "devDependencies": {
     "lerna": "^4.0.0"
