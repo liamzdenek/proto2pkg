@@ -65,13 +65,15 @@ const createGoProtoBuilder = (cfg: GoProtoBuilderConfig): Builder => {
             const PROTOC_BIN = await PROTOC_BIN_PROMISE;
             const PROTOC_GEN_GO_GRPC = await PROTOC_GEN_GO_GRPC_PROMISE;
             const PROTOC_GEN_GO = await PROTOC_GEN_GO_PROMISE;
+
+            await fs.mkdir(path.join(ctx.thisBuildContext.distDir, "pkg"), { recursive: true });
             await execShellCommand(ctx, PROTOC_BIN, [
                 `--plugin=protoc-gen-go=${PROTOC_GEN_GO}`,
                 `--plugin=protoc-gen-grpc_go=${PROTOC_GEN_GO_GRPC}`,
                 protoFiles,
                 `-I${path.join(ctx.sourceDir, "src")}`,
-                /***/`--go_out=${ctx.thisBuildContext.distDir}`,
-                `--grpc_go_out=${ctx.thisBuildContext.distDir}`,
+                /***/`--go_out=${path.join(ctx.thisBuildContext.distDir, 'pkg')}`,
+                `--grpc_go_out=${path.join(ctx.thisBuildContext.distDir, 'pkg')}`,
 
                 /***/`--go_opt=paths=source_relative`,
                 `--grpc_go_opt=paths=source_relative`,
@@ -87,8 +89,11 @@ const createGoProtoBuilder = (cfg: GoProtoBuilderConfig): Builder => {
             //await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "setup.cfg"), generateSetupCfg(ctx, cfg));
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "build.sh"), generateBuildSh(ctx, cfg));
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "go.mod"), await generateGoMod(ctx, cfg));
-            await fs.rename(path.join(ctx.thisBuildContext.distDir, "src"), path.join(ctx.thisBuildContext.distDir, "pkg"));
 
+            /*
+            await fs.mkdir(path.join(ctx.thisBuildContext.distDir, "pkg"), { recursive: true });
+            await execShellCommand(ctx, "sh", ["-c", "mv *.go pkg/"], ctx.thisBuildContext.distDir);
+             */
             await execShellCommand(ctx, "go", ["mod", "tidy"], ctx.thisBuildContext.distDir);
 
             return {

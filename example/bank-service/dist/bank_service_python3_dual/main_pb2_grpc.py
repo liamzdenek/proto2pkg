@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from . import main_pb2 as src_dot_main__pb2
+import main_pb2 as main__pb2
 
 
 class BankServiceStub(object):
@@ -16,8 +16,8 @@ class BankServiceStub(object):
         """
         self.GetBalance = channel.unary_unary(
                 '/BankService/GetBalance',
-                request_serializer=src_dot_main__pb2.GetBalanceRequest.SerializeToString,
-                response_deserializer=src_dot_main__pb2.GetBalanceResponse.FromString,
+                request_serializer=main__pb2.GetBalanceRequest.SerializeToString,
+                response_deserializer=main__pb2.GetBalanceResponse.FromString,
                 )
 
 
@@ -35,8 +35,8 @@ def add_BankServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetBalance': grpc.unary_unary_rpc_method_handler(
                     servicer.GetBalance,
-                    request_deserializer=src_dot_main__pb2.GetBalanceRequest.FromString,
-                    response_serializer=src_dot_main__pb2.GetBalanceResponse.SerializeToString,
+                    request_deserializer=main__pb2.GetBalanceRequest.FromString,
+                    response_serializer=main__pb2.GetBalanceResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -60,7 +60,7 @@ class BankService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/BankService/GetBalance',
-            src_dot_main__pb2.GetBalanceRequest.SerializeToString,
-            src_dot_main__pb2.GetBalanceResponse.FromString,
+            main__pb2.GetBalanceRequest.SerializeToString,
+            main__pb2.GetBalanceResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

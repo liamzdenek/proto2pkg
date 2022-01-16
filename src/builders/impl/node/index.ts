@@ -41,11 +41,13 @@ const createTsProtoBuilder = (cfg: TsProtoBuilderConfig): Builder => {
             const protoFiles = path.join(ctx.sourceDir, "/src/main.proto");
             const PROTOC_BIN = await PROTOC_BIN_PROMISE;
             const TS_PROTO_PLUGIN_BIN = await TS_PROTO_PLUGIN_BIN_PROMISE;
+
+            await fs.mkdir(path.join(ctx.thisBuildContext.distDir, "src"), { recursive: true });
             await execShellCommand(ctx, PROTOC_BIN, [
                 `--plugin=${TS_PROTO_PLUGIN_BIN}`,
                 protoFiles,
                 `-I${path.join(ctx.sourceDir, "src")}`,
-                `--ts_proto_out=${ctx.thisBuildContext.distDir}`,
+                `--ts_proto_out=${path.join(ctx.thisBuildContext.distDir, 'src')}`,
                 ...cfg.args
             ], ctx.sourceDir);
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "tsconfig.json"), generateTsconfig(ctx, cfg));

@@ -97,5 +97,5 @@ var BankService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "src/main.proto",
+	Metadata: "main.proto",
 }

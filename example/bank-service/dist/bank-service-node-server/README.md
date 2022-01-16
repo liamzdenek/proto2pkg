@@ -7,81 +7,53 @@
 1. [`bank-service` can be found here.](https://github.com/liamzdenek/proto2pkg/example/bank-service)
 1. At the time this package was generated:
     1. The `bank-service` version was: `0.0.1`
-    1. The `bank-service` commit hash was: `b605f74cb46ea9633b6c42b2d67a4d6dd0ff1bbb`
-    1. The build occurred at: 2022-01-02T17:23:03.221Z
+    1. The `bank-service` commit hash was: `64183c061235bbf6e75e33f608b64280844cf33d`
+    1. The build occurred at: 2022-01-16T02:48:44.074Z
 1. Below, you can find instructions regarding the generator for this package.
 
 ## NodeServer
 
 
+(Relevant documentation for nice-grpc)[https://github.com/deeplay-io/nice-grpc/tree/master/packages/nice-grpc]. Note that
+we are using ts-proto, not google-protobuf.
 
-TEST:
+This library is distributed in both JS and TS, so all code samples should work with plain JS with the types stripped.
+
+### Server stub implementation
+
 ```ts
 import {ServiceImplementation} from 'nice-grpc';
 import {
-	BankServiceDefinition,
-	GetBalanceRequest,
-	GetBalanceResponse,
+    BankServiceDefinition,
+    GetBalanceRequest,
+    GetBalanceResponse
+} from "bank-service-node-server/main";
+import {
     DeepPartial,
-} from 'bank-service-node-server';
+} from 'bank-service-node-server/main';
 
 const BankServiceImpl: ServiceImplementation<
     typeof BankServiceDefinition
 > = {
     async GetBalance(
         request: GetBalanceRequest,
-    ): Promise<DeepPartial<GetBalanceResponse>> {
+    ): Promise<DeepPartial<GetBalanceRequest>> {
         // ... method logic
         const response = {
-			"accountId": "" /* string */,
-			"balance": 0 /* sint64 */,
-		}
+            "accountId": "" /* string */,
+            "balance": 0 /* sint64 */,
+        }
         return response;
     },
 
 };
 
 
-```
-
-
-(Relevant documentation for nice-grpc)[https://github.com/deeplay-io/nice-grpc/tree/master/packages/nice-grpc]. Note that
-we are using ts-proto, not google-protobuf.
-
-This library is distributed in both JS and TS, so the below code sample should work with plain JS with the types stripped.
-
-For each `service` definition in your proto files, there will be a corresponding `[ServiceName]Definition` object
-within the compiled code. If you have a protoc definition like this, the below typescript is a valid server implementation.
-```proto
-service ExampleService {
-    rpc exampleUnaryMethod(ExampleRequest) returns (ExampleResponse) {}
-}
-```
-```ts
-import {ServiceImplementation} from 'nice-grpc';
-import {
-  ExampleServiceDefinition,
-  ExampleRequest,
-  ExampleResponse,
-  DeepPartial,
-} from 'bank-service-node-server';
-
-const exampleServiceImpl: ServiceImplementation<
-  typeof ExampleServiceDefinition
-> = {
-  async exampleUnaryMethod(
-    request: ExampleRequest,
-  ): Promise<DeepPartial<ExampleResponse>> {
-    // ... method logic
-
-    return response;
-  },
-};
 
 const server = createServer()/*.useMiddleware(middleware)*/;
 
 // you may implement multiple services within the same process/port, depending on your application architecture
-server.add(ExampleServiceDefinition, exampleServiceImpl);
+server.add(BankServiceDefinition, BankServiceImpl);
 
 await server.listen('0.0.0.0:8080');
 
@@ -89,5 +61,7 @@ process.on('SIGINT', async () => {
     await server.shutdown();
     process.exit();
 });
+
 ```
+
 

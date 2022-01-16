@@ -1,106 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8e6456d-96a9-4d5d-96d6-682e8a9dba67" name="Default Changelist" comment="feat: basic readme">
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/src/main.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-grpc-web-proxy/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-grpc-web-proxy/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-grpc-web-proxy/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-grpc-web-proxy/entrypoint.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/src/main.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/src/main.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank_service_go_dual/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank_service_go_dual/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank_service_go_dual/go.mod" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank_service_go_dual/go.sum" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank_service_go_dual/pkg/main.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank_service_go_dual/pkg/main_grpc.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/pyproject.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/setup.cfg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/src/bank_service_python3_dual/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/src/bank_service_python3_dual/main_pb2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/src/bank_service_python3_dual/main_pb2_grpc.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-browser-client-grpc-web/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-browser-client-grpc-web/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-browser-client-grpc-web/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-browser-client-grpc-web/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-browser-client-grpc-web/empty.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-browser-client-grpc-web/main.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-browser-client-grpc-web/messages.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-browser-client-grpc-web/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-browser-client-grpc-web/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-grpc-web-proxy/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-grpc-web-proxy/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-grpc-web-proxy/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-grpc-web-proxy/entrypoint.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-client/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-client/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-client/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-client/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-client/empty.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-client/main.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-client/messages.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-client/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-client/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-server/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-server/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-server/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-server/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-server/empty.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-server/main.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-server/messages.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-server/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc-aggressive-test-node-server/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc_aggressive_test_go_dual/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc_aggressive_test_go_dual/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc_aggressive_test_go_dual/go.mod" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc_aggressive_test_go_dual/main.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc_aggressive_test_go_dual/main_grpc.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc_aggressive_test_python3_dual/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc_aggressive_test_python3_dual/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc_aggressive_test_python3_dual/main_pb2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc_aggressive_test_python3_dual/main_pb2_grpc.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc_aggressive_test_python3_dual/pyproject.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc_aggressive_test_python3_dual/setup.cfg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/dist/grpc_aggressive_test_python3_dual/src/grpc_aggressive_test_python3_dual/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/proto2pkg.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/src/empty.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/src/main.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/grpc-aggressive-test/src/messages.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/lerna/packages/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/builders/impl/node/serverDocs.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/proto2pkg.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/proto2pkg.iml" afterDir="false" />
+    <list default="true" id="a8e6456d-96a9-4d5d-96d6-682e8a9dba67" name="Default Changelist" comment="feat: actually generated docs for NodeServer, and including dist for example dirs to link the docs from the main readme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/bank-service/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/example/bank-service/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builders/Builder.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/Builder.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-browser-client-grpc-web/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-grpc-web-proxy/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-grpc-web-proxy/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-grpc-web-proxy/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-grpc-web-proxy/entrypoint.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-client/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank-service-node-server/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank_service_go_dual/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank_service_go_dual/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank_service_go_dual/go.mod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank_service_go_dual/go.sum" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank_service_go_dual/pkg/main.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank_service_go_dual/pkg/main_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/pyproject.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/setup.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/src/bank_service_python3_dual/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/src/bank_service_python3_dual/main_pb2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/dist/bank_service_python3_dual/src/bank_service_python3_dual/main_pb2_grpc.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/bank-service/src/main.proto" beforeDir="false" afterPath="$PROJECT_DIR$/example/bank-service/src/main.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/builders/impl/go.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/impl/go.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/builders/impl/node/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/impl/node/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builders/impl/node/readmeGenerators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/impl/node/readmeGenerators.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builders/impl/python.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/impl/python.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmd/build.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmd/build.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +131,7 @@
       <option name="presentableId" value="Default" />
       <updated>1639985077378</updated>
       <workItem from="1639985078933" duration="76722000" />
-      <workItem from="1640669275424" duration="88315000" />
+      <workItem from="1640669275424" duration="89451000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit; functioning generators for node server/client, browser client, and grpc proxy">
       <created>1640321876252</created>
@@ -260,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640954875803</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feat: actually generated docs for NodeServer, and including dist for example dirs to link the docs from the main readme">
+      <created>1642300275878</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1642300275878</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,6 +240,7 @@
     <MESSAGE value="feat: --languages = selectively build specific langs' libs" />
     <MESSAGE value="feat: golang dual impl." />
     <MESSAGE value="feat: basic readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: basic readme" />
+    <MESSAGE value="feat: actually generated docs for NodeServer, and including dist for example dirs to link the docs from the main readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: actually generated docs for NodeServer, and including dist for example dirs to link the docs from the main readme" />
   </component>
 </project>
