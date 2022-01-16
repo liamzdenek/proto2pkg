@@ -1,0 +1,19 @@
+{
+  "name": "bank-service-browser-client-grpc-web",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.3"
+  },
+  "peerDependencies": {
+    "protobufjs": "^6.11.2",
+    "long": "^4.0.0",
+    "@improbable-eng/grpc-web": "^0.15.0",
+    "browser-headers": "^0.4.1"
+  }
+}

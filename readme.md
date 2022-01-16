@@ -13,7 +13,7 @@ Step 1: Prepare a directory like this, where `main.proto` is a protobuf that def
     └── main.proto
 ```
 
-Step 2: Run `proto2pkg`.
+Step 2: Run `proto2pkg build`.
 
 Step 3: Retire early:
 
@@ -110,18 +110,18 @@ You can publish the packages to each languages' registry, either public or a cor
 
 ## Language Support
 
-|Generator Name|Languages|Server|Client|Grpc-Web?|Note|
+|Generator Name|Languages|Server|Client|Grpc-Web?|Generated Docs|
 |---|---|---|---|---|---|
-|NodeClient|TS+JS|❌|✅|❌||
-|NodeServer|TS+JS|✅|❌|❌||
-|BrowserClientGrpcWeb|TS+JS|❌|✅|✅||
-|GrpcWebProxy|Docker|✅|❌|✅|Proxies a non-grpc-web service to grpc-web|
-|GoDual|Golang|✅|✅|❌||
-|Python3Dual|Python3|✅|✅|❌||
+|NodeClient|TS+JS|❌|✅|❌|[1](example/bank-service/dist/bank-service-node-client/README.md) [2](example/grpc-aggressive-test/dist/grpc-aggressive-test-node-client/README.md)|
+|NodeServer|TS+JS|✅|❌|❌|[1](example/bank-service/dist/bank-service-node-server/README.md) [2](example/grpc-aggressive-test/dist/grpc-aggressive-test-node-server/README.md)|
+|BrowserClientGrpcWeb|TS+JS|❌|✅|✅|[1](example/bank-service/dist/bank-service-browser-client-grpc-web/README.md) [2](example/grpc-aggressive-test/dist/grpc-aggressive-test-browser-client-grpc-web/README.md)|
+|GrpcWebProxy|Docker|✅|❌|✅|[1](example/bank-service/dist/bank-service-grpc-web-proxy/README.md) [2](example/grpc-aggressive-test/dist/grpc-aggressive-test-grpc-web-proxy/README.md)|
+|GoDual|Golang|✅|✅|❌|[1](example/bank-service/dist/bank_service_go_dual/README.md) [2](example/grpc-aggressive-test/dist/grpc_aggressive_test_go_dual/README.md)|
+|Python3Dual|Python3|✅|✅|❌|[1](example/bank-service/dist/bank_service_python3_dual/README.md) [2](example/grpc-aggressive-test/dist/grpc_aggressive_test_python3_dual/README.md)|
 
 ## Lerna Monorepo Integration
 
-If you're using TS/JS with a lerna monorepo, I would recommend the following approach, as seen in ./example/lerna/:
+[If you're using TS/JS with a lerna monorepo, read these docs](./docs/lerna.md), as seen in ./example/lerna
 
 
 ## CLI options

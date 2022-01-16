@@ -69,18 +69,18 @@ const createGoProtoBuilder = (cfg: GoProtoBuilderConfig): Builder => {
                 `--plugin=protoc-gen-go=${PROTOC_GEN_GO}`,
                 `--plugin=protoc-gen-grpc_go=${PROTOC_GEN_GO_GRPC}`,
                 protoFiles,
-                `-I${ctx.sourceDir}`,
+                `-I${path.join(ctx.sourceDir, "src")}`,
                 /***/`--go_out=${ctx.thisBuildContext.distDir}`,
                 `--grpc_go_out=${ctx.thisBuildContext.distDir}`,
 
                 /***/`--go_opt=paths=source_relative`,
                 `--grpc_go_opt=paths=source_relative`,
 
-                /***/`--go_opt=Msrc/main.proto=src/${ctx.thisBuildContext.packageName}`,
-                `--grpc_go_opt=Msrc/main.proto=src/${ctx.thisBuildContext.packageName}`,
+                ///***/`--go_opt=Msrc/main.proto=src/${ctx.thisBuildContext.packageName}`,
+                //`--grpc_go_opt=Msrc/main.proto=src/${ctx.thisBuildContext.packageName}`,
                 //`--go-grpc_opt=paths=source_relative`,
                 ...cfg.args
-            ], ctx.sourceDir);
+            ], path.join(ctx.sourceDir, "src"));
 
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "README.md"), cfg.readmeGenerator(ctx,cfg));
             //await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "pyproject.toml"), generatePyProjToml(ctx, cfg));

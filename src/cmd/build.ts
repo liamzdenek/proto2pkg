@@ -16,6 +16,7 @@ import {downloadProtocAndGrpcPlugins} from "../util/downloadProtoc";
 import {getEphemeralContext} from "../util/ephemeralContext";
 import {generateEnumListType} from "../util/LanguageType";
 import {getSupportedLanguages, Languages} from "../util/getSupportedLanguages";
+import {load as protobufLoad, Root, util} from 'protobufjs';
 
 const DEFAULT_PROTOC_URL = "https://packages.grpc.io/archive/2021/12/6ea821487923e63b3654990f4b30efe3a71c18ad-4b26a47a-d9db-4f9b-bc49-0926e6b85008/protoc/grpc-protoc_linux_x64-1.44.0-dev.tar.gz";
 
@@ -67,6 +68,7 @@ export const build = command({
                builderName: '',
            },
            proto2pkgJson: await loadProto2PkgJson(path.join(args.sourceDir, "/proto2pkg.json")),
+           protoRoot: await protobufLoad(path.join(args.sourceDir, "src/main.proto"))
        };
 
        // download the protoc and grpc plugins because they'll be used

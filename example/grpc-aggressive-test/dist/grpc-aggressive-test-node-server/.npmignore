@@ -1,0 +1,1 @@
+# this file is defined to override the default behavior of npm publish automatically including the gitignore. we don't want to npmignore ./dist

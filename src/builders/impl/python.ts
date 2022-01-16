@@ -19,7 +19,7 @@ const createPythonProtoBuilder = (cfg: PyProtoBuilderConfig): Builder => {
         languages: [Languages.Python3],
         async checkPrerequisites(ctx) {
             let errors: Error[] = [];
-            console.log('dirname', __dirname);
+            //console.log('dirname', __dirname);
             try {
                 await PROTOC_BIN_PROMISE;
                 await GRPC_PYTHON_PLUGIN_BIN_PROMISE;
@@ -35,16 +35,16 @@ const createPythonProtoBuilder = (cfg: PyProtoBuilderConfig): Builder => {
             await execShellCommand(ctx, PROTOC_BIN, [
                 `--plugin=protoc-gen-grpc_python=${GRPC_PYTHON_PLUGIN_BIN}`,
                 protoFiles,
-                `-I${ctx.sourceDir}`,
+                `-I${path.join(ctx.sourceDir, "src")}`,
                 `--python_out=${ctx.thisBuildContext.distDir}`,
                 `--grpc_python_out=${ctx.thisBuildContext.distDir}`,
                 ...cfg.args
             ], ctx.sourceDir);
             await fs.mkdir(path.join(ctx.thisBuildContext.distDir, "tests"), { recursive: true });
+            await fs.mkdir(path.join(ctx.thisBuildContext.distDir, "src/", ctx.thisBuildContext.packageName), { recursive: true});
             await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "src/__init__.py"), ""); // required to make python recognize the dir as a module
 
             // move all the files into a correct subdir
-            await fs.mkdir(path.join(ctx.thisBuildContext.distDir, "src/", ctx.thisBuildContext.packageName), { recursive: true});
             for(let file of await fs.readdir(path.join(ctx.thisBuildContext.distDir, "src"))) {
                 if(file === ctx.thisBuildContext.packageName) {
                     continue;
@@ -55,10 +55,11 @@ const createPythonProtoBuilder = (cfg: PyProtoBuilderConfig): Builder => {
                     console.log("rewriting contents of "+file);
                     let contents = (await fs.readFile(path.join(ctx.thisBuildContext.distDir, "src", file))).toString();
                     contents = contents.replace(/^from src import /gm, "from . import ");
-                    console.log("new contents ", contents);
+                    //console.log("new contents ", contents);
                     await fs.writeFile(path.join(ctx.thisBuildContext.distDir, "src", file), contents);
                 }
 
+                //console.log("rename", file, "->", path.join(ctx.thisBuildContext.distDir, "src/", ctx.thisBuildContext.packageName,"/",file))
                 await fs.rename(
                     path.join(ctx.thisBuildContext.distDir, "src", file),
                     path.join(ctx.thisBuildContext.distDir, "src/", ctx.thisBuildContext.packageName,"/",file)

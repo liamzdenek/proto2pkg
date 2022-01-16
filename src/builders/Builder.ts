@@ -1,4 +1,5 @@
 import {Languages} from "../util/getSupportedLanguages";
+import {Root} from "protobufjs";
 
 export interface Builder {
     packageNameStyle: PackageNameStyle;
@@ -24,6 +25,7 @@ export interface BuildContext {
     buildTime: Date,
     proto2pkgJson: Proto2PkgJson;
     thisBuildContext: ThisBuildContext;
+    protoRoot: Root;
 }
 
 export interface Proto2PkgJson {

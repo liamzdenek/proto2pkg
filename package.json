@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently npm:dev:build npm:dev:run",
     "dev:build": "webpack --mode=development --watch",
-    "dev:run": "nodemon -e js -w ./build/proto2pkg -w ./example/ -i ./example/*/dist -x \"./build/proto2pkg build example/bank-service --noBuild\""
+    "dev:run": "nodemon -e js -w ./build/proto2pkg -w ./example/ -i ./example/bank-service/dist -i ./example/grpc-aggressive-test/dist -x \"./build/proto2pkg build example/grpc-aggressive-test --noBuild\""
   },
   "bin": {
     "proto2pkg": "build/proto2pkg"
@@ -46,6 +46,7 @@
     "cmd-ts": "^0.8.0",
     "execa": "^6.0.0",
     "node-fetch": "^3.1.0",
+    "protobufjs": "^6.11.2",
     "protoc-tools": "^3.11.3",
     "regenerator-runtime": "^0.13.9",
     "semver": "^7.3.5",

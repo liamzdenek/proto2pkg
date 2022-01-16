@@ -44,7 +44,7 @@ const createTsProtoBuilder = (cfg: TsProtoBuilderConfig): Builder => {
             await execShellCommand(ctx, PROTOC_BIN, [
                 `--plugin=${TS_PROTO_PLUGIN_BIN}`,
                 protoFiles,
-                `-I${ctx.sourceDir}`,
+                `-I${path.join(ctx.sourceDir, "src")}`,
                 `--ts_proto_out=${ctx.thisBuildContext.distDir}`,
                 ...cfg.args
             ], ctx.sourceDir);
